@@ -112,9 +112,9 @@
 		58BF519A19881C6B00EAA8B1 /* SimonSays */ = {
 			isa = PBXGroup;
 			children = (
+				58BF51A619881C6B00EAA8B1 /* Main.storyboard */,
 				58BF51A319881C6B00EAA8B1 /* SSAppDelegate.h */,
 				58BF51A419881C6B00EAA8B1 /* SSAppDelegate.m */,
-				58BF51A619881C6B00EAA8B1 /* Main.storyboard */,
 				58BF51A919881C6B00EAA8B1 /* SSViewController.h */,
 				58BF51AA19881C6B00EAA8B1 /* SSViewController.m */,
 				58BF51AC19881C6B00EAA8B1 /* Images.xcassets */,
@@ -457,6 +457,7 @@
 				58BF51C519881C6C00EAA8B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		58BF51C619881C6C00EAA8B1 /* Build configuration list for PBXNativeTarget "SimonSaysTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +466,7 @@
 				58BF51C819881C6C00EAA8B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
