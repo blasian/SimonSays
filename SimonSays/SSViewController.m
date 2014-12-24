@@ -20,8 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *play;
 @property (nonatomic, strong) NSMutableArray *sequence;
 @property (strong, nonatomic) NSMutableArray *ans;
-@property (weak, nonatomic) IBOutlet UITextField *statusText;
-
+@property (weak, nonatomic) IBOutlet UILabel *highscoreLabel;
+@property (nonatomic) int highscore;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @end
 
 @implementation SSViewController
@@ -30,7 +31,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [self.statusText setHidden:YES];
+    self.scoreLabel.hidden = YES;
+    self.highscoreLabel.hidden = YES;
+    self.highscore = 0;
     self.state = 0;
     self.ans = [[NSMutableArray alloc] init];
     self.sequence = [[NSMutableArray alloc] init];
@@ -55,14 +58,21 @@
 
 
 - (IBAction)changeColor:(id)sender {
-    self.view.backgroundColor = [sender titleColorForState:UIControlStateNormal];
+    [UIView animateWithDuration:.25
+                     animations: ^{
+                         self.view.backgroundColor = [sender titleColorForState:UIControlStateNormal];
+                     }];
+    [UIView animateWithDuration:.5
+                     animations: ^{
+                         self.view.backgroundColor = [UIColor blackColor];
+                     }];
     [self.ans addObject:sender];
 }
 
 -(IBAction)play:(id)sender {
     [sender setHidden:YES];
     int color;
-    do { color = rand() % 4; }
+    do { color = arc4random() % 4; }
     while (color == self.prev);
     switch (color) {
         case 0:
@@ -85,19 +95,27 @@
             break;
     }
     self.prev = color;
+    self.scoreLabel.hidden = NO;
+    self.highscoreLabel.hidden = NO;
+    self.playing = 1;
     [self animate:0];
 }
 
 - (void) animate:(int) iteration
 {
-    [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionTransitionFlipFromRight
-                     animations:^{ self.view.backgroundColor = [_sequence[iteration] titleColorForState:UIControlStateNormal]; }
+    [UIView animateWithDuration:.5 delay:.25 options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.view.backgroundColor = [_sequence[iteration] titleColorForState:UIControlStateNormal];
+                     }
                      completion:^(BOOL finished) {
+                         [UIView animateWithDuration:.5
+                                          animations: ^{
+                                              self.view.backgroundColor = [UIColor blackColor];
+                                          }
+                          ];
                          if (iteration < [_sequence count] - 1) {
                              [self animate:iteration + 1];
                          } else {
-                             self.view.backgroundColor = [_sequence[0] titleColorForState:UIControlStateNormal];
-                             self.playing = 1;
                              [self handleUser];
                          }
                      }
@@ -109,12 +127,12 @@
     switch (_state) {
         // Waiting for user input
         case 0:
-            if (([_ans count] == [_sequence count]) && (_ans != 0))
+            if (([_ans count] == [_sequence count]) && ([_ans count] != 0))
                 _state = 1;
             break;
         // Determining user input
         case 1:
-            for (int i = 0; i < [_sequence count]; i++) {
+            for (int i = 0; i < [_ans count]; i++) {
                 if (_sequence[i] == _ans[i]) {
                     _state = 2;
                 } else {
@@ -125,25 +143,26 @@
             break;
         // Correct user input
         case 2:
-            [self.statusText setText:@"CORRECT"];
-            [self.statusText setHidden:NO];
-            [NSThread sleepForTimeInterval:1];
+            //[self.statusText setHidden:NO];
             NSLog(@"YOU ARE CORRECT");
             _state = 0;
+            if ([_ans count] > _highscore) {
+                _highscore++;
+                _highscoreLabel.text = [[NSString alloc] initWithFormat: @"Highscore: %d", _highscore];
+            }
             _ans = [[NSMutableArray alloc] init];
             [self play:_play];
             break;
+        // Incorrect user input
         case 3:
-            [self.statusText setText:@"INCORRECT"];
-            [self.statusText setHidden:NO];
             NSLog(@"YOU ARE INCORRECT");
-            [NSThread sleepForTimeInterval:1];
             [self.play setHidden:NO];
             [self setPlaying:0];
             [self viewDidLoad];
             break;
     }
     if (self.playing)
+        self.scoreLabel.text = [[NSString alloc] initWithFormat:@"%d / %d", (int)[_ans count], (int)[_sequence count]];
         [self performSelector:@selector(handleUser) withObject:nil afterDelay:.1];
 }
 @end

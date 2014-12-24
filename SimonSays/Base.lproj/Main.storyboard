@@ -13,12 +13,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="CORRECT" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="tiv-rv-VqJ">
-                                <rect key="frame" x="87" y="206" width="146" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dfk-iZ-pUA">
                                 <rect key="frame" x="30" y="62" width="72" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -69,11 +63,25 @@
                                     <action selector="changeColor:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="eyC-wH-W96"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highscore: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iYw-BY-g8S">
+                                <rect key="frame" x="21" y="527" width="97" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 / 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H0x-Ml-dud">
+                                <rect key="frame" x="250" y="527" width="44" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="0.6475141405" green="0.64138641139999997" blue="0.65378393310000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qyR-wD-AW2">
-                                <rect key="frame" x="123" y="448" width="74" height="51"/>
+                                <rect key="frame" x="122" y="206" width="77" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="Play">
+                                <state key="normal" title="START">
                                     <color key="titleColor" red="0.64751414054770451" green="0.64138641144310882" blue="0.65378393308080807" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -84,9 +92,10 @@
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="highscoreLabel" destination="iYw-BY-g8S" id="9bS-xY-Elu"/>
                         <outlet property="oneButton" destination="TD7-WN-QnN" id="wqa-D0-9pr"/>
                         <outlet property="play" destination="qyR-wD-AW2" id="gQz-tb-sJg"/>
-                        <outlet property="statusText" destination="tiv-rv-VqJ" id="2cy-uc-hAC"/>
+                        <outlet property="scoreLabel" destination="H0x-Ml-dud" id="fop-gc-FYX"/>
                         <outlet property="threeButton" destination="7sk-hP-Ugt" id="KhH-CG-pY4"/>
                         <outlet property="twoButton" destination="94t-Qd-e56" id="dnl-Kb-HDR"/>
                         <outlet property="zeroButton" destination="dfk-iZ-pUA" id="q6J-Xr-NBi"/>
