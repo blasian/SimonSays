@@ -13,6 +13,7 @@
 @property (nonatomic) int userInput;
 @property (nonatomic) int state;
 @property (nonatomic) int prev;
+@property (weak, nonatomic) IBOutlet UILabel *status;
 @property (weak, nonatomic) IBOutlet UIButton *zeroButton;
 @property (weak, nonatomic) IBOutlet UIButton *oneButton;
 @property (weak, nonatomic) IBOutlet UIButton *twoButton;
@@ -71,6 +72,7 @@
 
 -(IBAction)play:(id)sender {
     [sender setHidden:YES];
+    [self.status setHidden:YES];
     int color;
     do { color = arc4random() % 4; }
     while (color == self.prev);
@@ -108,16 +110,17 @@
                          self.view.backgroundColor = [_sequence[iteration] titleColorForState:UIControlStateNormal];
                      }
                      completion:^(BOOL finished) {
-                         [UIView animateWithDuration:.5
-                                          animations: ^{
+                         [UIView animateWithDuration:.25
+                                          animations:^{
                                               self.view.backgroundColor = [UIColor blackColor];
                                           }
-                          ];
-                         if (iteration < [_sequence count] - 1) {
-                             [self animate:iteration + 1];
-                         } else {
-                             [self handleUser];
-                         }
+                                          completion:^(BOOL completion) {
+                                              if (iteration < [_sequence count] - 1) {
+                                                  [self animate:iteration + 1];
+                                              } else {
+                                                  [self handleUser];
+                                              }
+                                          }];
                      }
      ];
 }
@@ -143,8 +146,8 @@
             break;
         // Correct user input
         case 2:
-            //[self.statusText setHidden:NO];
             NSLog(@"YOU ARE CORRECT");
+            [NSThread sleepForTimeInterval:1];
             _state = 0;
             if ([_ans count] > _highscore) {
                 _highscore++;
@@ -155,6 +158,7 @@
             break;
         // Incorrect user input
         case 3:
+            [self.status setHidden:NO];
             NSLog(@"YOU ARE INCORRECT");
             [self.play setHidden:NO];
             [self setPlaying:0];

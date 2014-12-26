@@ -82,13 +82,20 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="START">
-                                    <color key="titleColor" red="0.64751414054770451" green="0.64138641144310882" blue="0.65378393308080807" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="play:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="1DD-Gn-3UC"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INCORRECT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A81-IG-Sdx">
+                                <rect key="frame" x="0.0" y="253" width="320" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <color key="textColor" red="0.6475141405" green="0.64138641139999997" blue="0.65378393310000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                     </view>
                     <connections>
@@ -96,6 +103,7 @@
                         <outlet property="oneButton" destination="TD7-WN-QnN" id="wqa-D0-9pr"/>
                         <outlet property="play" destination="qyR-wD-AW2" id="gQz-tb-sJg"/>
                         <outlet property="scoreLabel" destination="H0x-Ml-dud" id="fop-gc-FYX"/>
+                        <outlet property="status" destination="A81-IG-Sdx" id="JK7-rt-8oQ"/>
                         <outlet property="threeButton" destination="7sk-hP-Ugt" id="KhH-CG-pY4"/>
                         <outlet property="twoButton" destination="94t-Qd-e56" id="dnl-Kb-HDR"/>
                         <outlet property="zeroButton" destination="dfk-iZ-pUA" id="q6J-Xr-NBi"/>
